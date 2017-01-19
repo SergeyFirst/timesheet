@@ -43,7 +43,7 @@
                     <tbody id="projects-table">
                         <tbody>
                             <tr *ngFor="let project of projects">
-                                <td><input type="checkbox" class="project-over-limit" [(ngModel)]="project.checked"></td>
+                                <td><input type="checkbox" class="project-checked" [(ngModel)]="project.checked"></td>
                                 <td>{{project.id}}</td>
                                 <td>{{project.code}}</td>
                                 <td>{{project.name}}</td>

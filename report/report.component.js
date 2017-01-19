@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var report_service_1 = require("./report.service");
+var core_2 = require("@angular/core");
+core_2.enableProdMode();
 var Report = (function () {
     function Report(date, name, code, hours, overLimit, comment, accepted) {
         this.date = date;
@@ -55,9 +57,10 @@ var ReportComponent = (function () {
         this.ReportSevice.getData(this.email, this.convertDate(this.dateBegin), this.convertDate(this.dateEnd), token).then(function (data, textStatus, jqXHR) {
             var jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
             var jData = $.parseJSON(jsonString)['#value'];
+            _this.total = 0;
             for (var i = 0; i < jData.length; i++) {
                 _this.report.push(new Report(jData[i].Date, jData[i].ProjectName, jData[i].ProjectCode, jData[i].Hours, jData[i].OverLimit, jData[i].Comment, jData[i].Accepted));
-                _this.total = +jData[i].Hours;
+                _this.total += jData[i].Hours;
             }
         });
     };

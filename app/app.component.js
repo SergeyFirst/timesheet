@@ -12,6 +12,8 @@ var core_1 = require("@angular/core");
 var projects_service_1 = require("./projects.service");
 var projects_for_selection_service_1 = require("./projects.for.selection.service");
 var save_projects_service_1 = require("./save.projects.service");
+var core_2 = require("@angular/core");
+core_2.enableProdMode();
 var Project = (function () {
     function Project(id, name, code, hours, overLimit, comment) {
         this.id = id;
@@ -62,6 +64,7 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.getProjectsData = function () {
         var _this = this;
+        this.lockForm();
         Office.context.mailbox.getUserIdentityTokenAsync(function (asyncResult) {
             _this.getProjectsDataAssync(asyncResult.value);
         });
@@ -77,6 +80,7 @@ var AppComponent = (function () {
                 _this.projects.push(new Project(_this.projects.length + 1, jData[i].ProjectName, jData[i].ProjectCode, jData[i].Hours, jData[i].OverLimit, jData[i].Comment));
             }
             _this.onHoursChange();
+            _this.unlockForm();
         });
         this.projectsForSelection = [];
         this.ProjectForSelectionSevice.getData(this.email, this.convertDate(this.myDate), token).then(function (data, textStatus, jqXHR) {
@@ -91,6 +95,7 @@ var AppComponent = (function () {
                     customerArray[0].projectsForSelection.push(new ProjectForSelection(jData[i].Name, jData[i].Code));
                 }
             }
+            //this.unlockForm();
         });
     };
     AppComponent.prototype.ngAfterViewInit = function () {
@@ -204,8 +209,9 @@ var AppComponent = (function () {
         this.total = this.projects.reduce(function (sum, current) { return (sum + current.hours); }, 0);
     };
     AppComponent.prototype.onDateChange = function (dateRU, date) {
-        this.getProjectsData();
-        this.hide();
+        if (String(new Date(this.convertDate(this.myDate))) != 'Invalid Date' && this.myDate.length == 10) {
+            this.getProjectsData();
+        }
     };
     AppComponent.prototype.convertDate = function (dateRU) {
         dateRU = "" + dateRU.replace(new RegExp(String.fromCharCode(8206), 'g'), "");
@@ -217,12 +223,18 @@ var AppComponent = (function () {
         $("#datepicker").attr("disabled", "disabled");
         $("#add-project-btn").attr("disabled", "disabled");
         $("#remove-project-btn").attr("disabled", "disabled");
+        $(".project-checked").attr("disabled", "disabled");
+        $(".project-hours").attr("disabled", "disabled");
+        $(".add-comment").attr("disabled", "disabled");
     };
     AppComponent.prototype.unlockForm = function () {
         $("#submit-btn").attr("disabled", false);
         $("#datepicker").attr("disabled", false);
         $("#add-project-btn").attr("disabled", false);
         $("#remove-project-btn").attr("disabled", false);
+        $(".project-checked").attr("disabled", false);
+        $(".project-hours").attr("disabled", false);
+        $(".add-comment").attr("disabled", false);
     };
     return AppComponent;
 }());
