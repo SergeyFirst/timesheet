@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ProjectService } from './projects.service';
 import { ProjectForSelectionService } from './projects.for.selection.service';
 import { SaveProjectsService } from './save.projects.service';
+import { enableProdMode } from '@angular/core';
+
+enableProdMode();
 
 export class Project {
     id: number;
@@ -66,6 +69,7 @@ export class AppComponent {
         this.getProjectsData()
     }
     getProjectsData() {
+        this.lockForm();
         Office.context.mailbox.getUserIdentityTokenAsync(asyncResult => {
             this.getProjectsDataAssync(asyncResult.value)
         });
@@ -90,6 +94,7 @@ export class AppComponent {
                 //this.total = this.total + jData[i].Hours;
             }
             this.onHoursChange();
+            this.unlockForm();
         });
 
         this.projectsForSelection = [];
@@ -106,7 +111,9 @@ export class AppComponent {
                     customerArray[0].projectsForSelection.push(new ProjectForSelection(jData[i].Name, jData[i].Code));
                 }
             }
+            //this.unlockForm();
         });
+
     }
     ngAfterViewInit() {
         //Диалог выбора даты
@@ -228,8 +235,10 @@ export class AppComponent {
         this.total = this.projects.reduce(function (sum, current) { return (sum + current.hours); }, 0);
     }
     onDateChange(dateRU: string, date: any) {
-        this.getProjectsData();
-        this.hide();
+         if (String(new Date(this.convertDate(this.myDate))) != 'Invalid Date' && this.myDate.length == 10) {
+            this.getProjectsData();
+            //this.hide();
+         }
     }
     convertDate(dateRU: string) {
         dateRU = "" + dateRU.replace(new RegExp(String.fromCharCode(8206), 'g'), "");
@@ -241,6 +250,9 @@ export class AppComponent {
         $("#datepicker").attr("disabled","disabled");
         $("#add-project-btn").attr("disabled","disabled");
         $("#remove-project-btn").attr("disabled","disabled");
+        $(".project-checked").attr("disabled","disabled");
+        $(".project-hours").attr("disabled","disabled");
+        $(".add-comment").attr("disabled","disabled");
     }
 
     unlockForm() {
@@ -248,6 +260,9 @@ export class AppComponent {
         $("#datepicker").attr("disabled", false);
         $("#add-project-btn").attr("disabled", false);
         $("#remove-project-btn").attr("disabled",false);
+        $(".project-checked").attr("disabled",false);
+        $(".project-hours").attr("disabled",false);
+        $(".add-comment").attr("disabled",false);
     }
 
 }

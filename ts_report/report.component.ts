@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { ReportService } from './report.service';
+import { enableProdMode } from '@angular/core';
+
+enableProdMode();
 
 export class Report {
     date: Date;
@@ -63,6 +66,7 @@ export class ReportComponent {
 
             let jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
             let jData = $.parseJSON(jsonString)['#value'];
+            this.total = 0;
 
             for (var i = 0; i < jData.length; i++) {
                 this.report.push(new Report(jData[i].Date,
@@ -72,7 +76,7 @@ export class ReportComponent {
                                             jData[i].OverLimit,
                                             jData[i].Comment,
                                             jData[i].Accepted));
-               this.total =+ jData[i].Hours;
+               this.total += jData[i].Hours;
             }
         });
     }    
