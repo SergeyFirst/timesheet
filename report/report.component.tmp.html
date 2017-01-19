@@ -1,0 +1,57 @@
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="datepickerBegin" placeholder="ДД.ММ.ГГГГ" [(ngModel)]="dateBegin">
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="datepickerEnd" placeholder="ДД.ММ.ГГГГ" [(ngModel)]="dateEnd">
+                </div>
+            
+            <button type="button" class="btn btn-default" (click)="greateReport()">
+                    <span class="glyphicon glyphicon-play" style="font-size: 16px;"></span>
+                    Сформировать
+            </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="5%">Дата</th>
+                        <th width="15%">Код</th>
+                        <th width="60%">Проект</th>
+                        <th width="10%">Трудозатраты, ч</th>
+                        <th width="5%">Комментарий</th>
+                        <th width="5%">Согласовано</th>
+                    </tr>
+                </thead>
+                <tbody id="projects-table">
+                    <tr *ngFor="let project of report">
+                        <td>{{project.date | date:"dd.MM.yyyy"}}</td>
+                        <td>{{project.code}}</td>
+                        <td>{{project.name}}</td>
+                        <td>{{project.hours}}</td>
+                        <td>{{project.comment}}</td>
+                        <td>{{project.accepted | i18nSelect: booleanMap}}</td>
+                    </tr>
+                    <tr class="pr-total" id="app-total">
+                        <td></td>
+                        <td></td>
+                        <td>Итого:</td>
+                        <td id="total-text">{{total}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

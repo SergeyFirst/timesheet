@@ -1,0 +1,371 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '--save',
+1 verbose cli   '@types/jquery.soap' ]
+2 info using npm@2.14.20
+3 info using node@v4.4.1
+4 verbose install initial load of C:\Apache24\htdocs\Angular\package.json
+5 warn package.json helloapp@1.0.0 No description
+6 warn package.json helloapp@1.0.0 No repository field.
+7 warn package.json helloapp@1.0.0 No README data
+8 warn package.json helloapp@1.0.0 No license field.
+9 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\angular-in-memory-web-api\package.json
+10 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\bootstrap\package.json
+11 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\concurrently\package.json
+12 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\core-js\package.json
+13 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\lite-server\package.json
+14 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\npm-bootstrap\package.json
+15 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\reflect-metadata\package.json
+16 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\rxjs\package.json
+17 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\systemjs\package.json
+18 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\typescript\package.json
+19 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\zone.js\package.json
+20 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@types\core-js\package.json
+21 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@types\node\package.json
+22 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@angular\common\package.json
+23 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@angular\compiler\package.json
+24 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@angular\core\package.json
+25 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@angular\forms\package.json
+26 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@angular\http\package.json
+27 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@angular\platform-browser\package.json
+28 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@angular\platform-browser-dynamic\package.json
+29 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@angular\router\package.json
+30 verbose installManyTop reading scoped package data from C:\Apache24\htdocs\Angular\node_modules\@angular\upgrade\package.json
+31 info package.json core-js@2.4.1 No README data
+32 verbose readDependencies loading dependencies from C:\Apache24\htdocs\Angular\package.json
+33 silly cache add args [ '@types/jquery.soap', null ]
+34 verbose cache add spec @types/jquery.soap
+35 silly cache add parsed spec Result {
+35 silly cache add   raw: '@types/jquery.soap',
+35 silly cache add   scope: '@types',
+35 silly cache add   name: '@types/jquery.soap',
+35 silly cache add   rawSpec: '',
+35 silly cache add   spec: 'latest',
+35 silly cache add   type: 'tag' }
+36 silly addNamed @types/jquery.soap@latest
+37 verbose addNamed "latest" is being treated as a dist-tag for @types/jquery.soap
+38 info addNameTag [ '@types/jquery.soap', 'latest' ]
+39 silly mapToRegistry name @types/jquery.soap
+40 silly mapToRegistry scope (from package name) @types
+41 verbose mapToRegistry no registry URL found in name for scope @types
+42 silly mapToRegistry using default registry
+43 silly mapToRegistry registry https://registry.npmjs.org/
+44 silly mapToRegistry uri https://registry.npmjs.org/@types%2fjquery.soap
+45 verbose addNameTag registry:https://registry.npmjs.org/@types%2fjquery.soap not in flight; fetching
+46 verbose request uri https://registry.npmjs.org/@types%2fjquery.soap
+47 verbose request no auth needed
+48 info attempt registry request try #1 at 13:45:29
+49 verbose request id 3950ff802ed45437
+50 http request GET https://registry.npmjs.org/@types%2fjquery.soap
+51 http 200 https://registry.npmjs.org/@types%2fjquery.soap
+52 verbose headers { server: 'CouchDB/1.6.1 (Erlang OTP/R16B03)',
+52 verbose headers   'content-type': 'application/json',
+52 verbose headers   etag: '"57e0255a-3238"',
+52 verbose headers   'content-encoding': 'gzip',
+52 verbose headers   'cache-control': 'max-age=0',
+52 verbose headers   'transfer-encoding': 'chunked',
+52 verbose headers   'accept-ranges': 'bytes',
+52 verbose headers   date: 'Sun, 18 Dec 2016 10:45:38 GMT',
+52 verbose headers   via: '1.1 varnish',
+52 verbose headers   age: '0',
+52 verbose headers   connection: 'keep-alive',
+52 verbose headers   'x-served-by': 'cache-ams4450-AMS',
+52 verbose headers   'x-cache': 'MISS',
+52 verbose headers   'x-cache-hits': '0',
+52 verbose headers   'x-timer': 'S1482057938.430821,VS0,VE354',
+52 verbose headers   vary: 'Accept-Encoding' }
+53 silly get cb [ 200,
+53 silly get   { server: 'CouchDB/1.6.1 (Erlang OTP/R16B03)',
+53 silly get     'content-type': 'application/json',
+53 silly get     etag: '"57e0255a-3238"',
+53 silly get     'content-encoding': 'gzip',
+53 silly get     'cache-control': 'max-age=0',
+53 silly get     'transfer-encoding': 'chunked',
+53 silly get     'accept-ranges': 'bytes',
+53 silly get     date: 'Sun, 18 Dec 2016 10:45:38 GMT',
+53 silly get     via: '1.1 varnish',
+53 silly get     age: '0',
+53 silly get     connection: 'keep-alive',
+53 silly get     'x-served-by': 'cache-ams4450-AMS',
+53 silly get     'x-cache': 'MISS',
+53 silly get     'x-cache-hits': '0',
+53 silly get     'x-timer': 'S1482057938.430821,VS0,VE354',
+53 silly get     vary: 'Accept-Encoding' } ]
+54 verbose get saving @types/jquery.soap to C:\Users\Сергей\AppData\Roaming\npm-cache\registry.npmjs.org\_40types_252fjquery.soap\.cache.json
+55 verbose correctMkdir C:\Users\Сергей\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+56 silly addNameTag next cb for @types/jquery.soap with tag latest
+57 silly addNamed @types/jquery.soap@1.6.28
+58 verbose addNamed "1.6.28" is a plain semver version for @types/jquery.soap
+59 silly mapToRegistry name @types/jquery.soap
+60 silly mapToRegistry scope (from package name) @types
+61 verbose mapToRegistry no registry URL found in name for scope @types
+62 silly mapToRegistry using default registry
+63 silly mapToRegistry registry https://registry.npmjs.org/
+64 silly mapToRegistry uri https://registry.npmjs.org/@types%2fjquery.soap
+65 verbose addRemoteTarball https://registry.npmjs.org/@types/jquery.soap/-/jquery.soap-1.6.28.tgz not in flight; adding
+66 verbose addRemoteTarball [ 'https://registry.npmjs.org/@types/jquery.soap/-/jquery.soap-1.6.28.tgz',
+66 verbose addRemoteTarball   '22c4de8f38ad4cc82c52779156f303f136bc0f58' ]
+67 info retry fetch attempt 1 at 13:45:30
+68 info attempt registry request try #1 at 13:45:30
+69 http fetch GET https://registry.npmjs.org/@types/jquery.soap/-/jquery.soap-1.6.28.tgz
+70 http fetch 200 https://registry.npmjs.org/@types/jquery.soap/-/jquery.soap-1.6.28.tgz
+71 silly fetchAndShaCheck shasum 22c4de8f38ad4cc82c52779156f303f136bc0f58
+72 verbose addTmpTarball C:\Users\D899~1\AppData\Local\Temp\npm-15428-55ef8983\registry.npmjs.org\_40types\jquery.soap\-\jquery.soap-1.6.28.tgz not in flight; adding
+73 verbose addTmpTarball already have metadata; skipping unpack for @types/jquery.soap@1.6.28
+74 verbose correctMkdir C:\Users\Сергей\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+75 silly cache afterAdd @types/jquery.soap@1.6.28
+76 verbose afterAdd C:\Users\Сергей\AppData\Roaming\npm-cache\@types\jquery.soap\1.6.28\package\package.json not in flight; writing
+77 verbose correctMkdir C:\Users\Сергей\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+78 verbose afterAdd C:\Users\Сергей\AppData\Roaming\npm-cache\@types\jquery.soap\1.6.28\package\package.json written
+79 silly install resolved [ { name: '@types/jquery.soap',
+79 silly install resolved     version: '1.6.28',
+79 silly install resolved     description: 'TypeScript definitions for jQuery.SOAP 1.6.7',
+79 silly install resolved     license: 'MIT',
+79 silly install resolved     author: 'Roland Greim <https://github.com/tigerxy>',
+79 silly install resolved     main: '',
+79 silly install resolved     repository:
+79 silly install resolved      { type: 'git',
+79 silly install resolved        url: 'https://www.github.com/DefinitelyTyped/DefinitelyTyped.git' },
+79 silly install resolved     scripts: {},
+79 silly install resolved     dependencies: { '@types/jquery': '*' },
+79 silly install resolved     typings: 'index.d.ts',
+79 silly install resolved     typesPublisherContentHash: '66cba20e2c450312c0f9172ed438df95e318c00106ff03adadc359fcc87a0846',
+79 silly install resolved     _id: '@types/jquery.soap@1.6.28',
+79 silly install resolved     dist:
+79 silly install resolved      { shasum: '22c4de8f38ad4cc82c52779156f303f136bc0f58',
+79 silly install resolved        tarball: 'https://registry.npmjs.org/@types/jquery.soap/-/jquery.soap-1.6.28.tgz' },
+79 silly install resolved     maintainers: [ [Object] ],
+79 silly install resolved     _npmUser: { name: 'types', email: 'ts-npm-types@microsoft.com' },
+79 silly install resolved     _npmOperationalInternal:
+79 silly install resolved      { host: 'packages-16-east.internal.npmjs.com',
+79 silly install resolved        tmp: 'tmp/jquery.soap-1.6.28.tgz_1474307414995_0.30661835917271674' },
+79 silly install resolved     directories: {},
+79 silly install resolved     _shasum: '22c4de8f38ad4cc82c52779156f303f136bc0f58',
+79 silly install resolved     _resolved: 'https://registry.npmjs.org/@types/jquery.soap/-/jquery.soap-1.6.28.tgz',
+79 silly install resolved     _from: '@types/jquery.soap@latest' } ]
+80 info install @types/jquery.soap@1.6.28 into C:\Apache24\htdocs\Angular
+81 info installOne @types/jquery.soap@1.6.28
+82 verbose installOne of @types/jquery.soap to C:\Apache24\htdocs\Angular not in flight; installing
+83 verbose correctMkdir C:\Users\Сергей\AppData\Roaming\npm-cache\_locks correctMkdir not in flight; initializing
+84 verbose lock using C:\Users\Сергей\AppData\Roaming\npm-cache\_locks\types-jquery-soap-af0b5d24f5d70955.lock for C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap
+85 silly install write writing @types/jquery.soap 1.6.28 to C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap
+86 verbose unbuild node_modules\@types\jquery.soap
+87 silly gentlyRm C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap is being purged from base C:\Apache24\htdocs\Angular
+88 verbose gentlyRm don't care about contents; nuking C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap
+89 verbose tar unpack C:\Users\Сергей\AppData\Roaming\npm-cache\@types\jquery.soap\1.6.28\package.tgz
+90 verbose tar unpacking to C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap
+91 silly gentlyRm C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap is being purged
+92 verbose gentlyRm don't care about contents; nuking C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap
+93 silly gunzTarPerm modes [ '777', '666' ]
+94 silly gunzTarPerm extractEntry README.md
+95 silly gunzTarPerm modified mode [ 'README.md', 420, 438 ]
+96 silly gunzTarPerm extractEntry index.d.ts
+97 silly gunzTarPerm modified mode [ 'index.d.ts', 420, 438 ]
+98 silly gunzTarPerm extractEntry package.json
+99 silly gunzTarPerm modified mode [ 'package.json', 420, 438 ]
+100 silly gunzTarPerm extractEntry types-metadata.json
+101 silly gunzTarPerm modified mode [ 'types-metadata.json', 420, 438 ]
+102 verbose write writing to C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\package.json
+103 info preinstall @types/jquery.soap@1.6.28
+104 verbose readDependencies loading dependencies from C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\package.json
+105 silly prepareForInstallMany adding @types/jquery@* from @types/jquery.soap dependencies
+106 verbose readDependencies loading dependencies from C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\package.json
+107 silly cache add args [ '@types/jquery@*', null ]
+108 verbose cache add spec @types/jquery@*
+109 silly cache add parsed spec Result {
+109 silly cache add   raw: '@types/jquery@*',
+109 silly cache add   scope: '@types',
+109 silly cache add   name: '@types/jquery',
+109 silly cache add   rawSpec: '*',
+109 silly cache add   spec: '*',
+109 silly cache add   type: 'range' }
+110 silly addNamed @types/jquery@*
+111 verbose addNamed "*" is a valid semver range for @types/jquery
+112 silly addNameRange { name: '@types/jquery', range: '*', hasData: false }
+113 silly mapToRegistry name @types/jquery
+114 silly mapToRegistry scope (from package name) @types
+115 verbose mapToRegistry no registry URL found in name for scope @types
+116 silly mapToRegistry using default registry
+117 silly mapToRegistry registry https://registry.npmjs.org/
+118 silly mapToRegistry uri https://registry.npmjs.org/@types%2fjquery
+119 verbose addNameRange registry:https://registry.npmjs.org/@types%2fjquery not in flight; fetching
+120 verbose request uri https://registry.npmjs.org/@types%2fjquery
+121 verbose request no auth needed
+122 info attempt registry request try #1 at 13:45:30
+123 http request GET https://registry.npmjs.org/@types%2fjquery
+124 http 200 https://registry.npmjs.org/@types%2fjquery
+125 verbose headers { server: 'CouchDB/1.6.1 (Erlang OTP/R16B03)',
+125 verbose headers   'content-type': 'application/json',
+125 verbose headers   etag: '"5820e433-6970"',
+125 verbose headers   'content-encoding': 'gzip',
+125 verbose headers   'cache-control': 'max-age=0',
+125 verbose headers   'transfer-encoding': 'chunked',
+125 verbose headers   'accept-ranges': 'bytes',
+125 verbose headers   date: 'Sun, 18 Dec 2016 10:45:39 GMT',
+125 verbose headers   via: '1.1 varnish',
+125 verbose headers   age: '0',
+125 verbose headers   connection: 'keep-alive',
+125 verbose headers   'x-served-by': 'cache-ams4428-AMS',
+125 verbose headers   'x-cache': 'MISS',
+125 verbose headers   'x-cache-hits': '0',
+125 verbose headers   'x-timer': 'S1482057939.558307,VS0,VE413',
+125 verbose headers   vary: 'Accept-Encoding' }
+126 silly get cb [ 200,
+126 silly get   { server: 'CouchDB/1.6.1 (Erlang OTP/R16B03)',
+126 silly get     'content-type': 'application/json',
+126 silly get     etag: '"5820e433-6970"',
+126 silly get     'content-encoding': 'gzip',
+126 silly get     'cache-control': 'max-age=0',
+126 silly get     'transfer-encoding': 'chunked',
+126 silly get     'accept-ranges': 'bytes',
+126 silly get     date: 'Sun, 18 Dec 2016 10:45:39 GMT',
+126 silly get     via: '1.1 varnish',
+126 silly get     age: '0',
+126 silly get     connection: 'keep-alive',
+126 silly get     'x-served-by': 'cache-ams4428-AMS',
+126 silly get     'x-cache': 'MISS',
+126 silly get     'x-cache-hits': '0',
+126 silly get     'x-timer': 'S1482057939.558307,VS0,VE413',
+126 silly get     vary: 'Accept-Encoding' } ]
+127 verbose get saving @types/jquery to C:\Users\Сергей\AppData\Roaming\npm-cache\registry.npmjs.org\_40types_252fjquery\.cache.json
+128 verbose correctMkdir C:\Users\Сергей\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+129 silly addNameRange number 2 { name: '@types/jquery', range: '*', hasData: true }
+130 silly addNameRange versions [ '@types/jquery',
+130 silly addNameRange   [ '1.10.8-alpha',
+130 silly addNameRange     '1.10.14-alpha',
+130 silly addNameRange     '1.10.15-alpha',
+130 silly addNameRange     '1.10.20-alpha',
+130 silly addNameRange     '1.10.21-alpha',
+130 silly addNameRange     '1.10.22-alpha',
+130 silly addNameRange     '1.10.23-alpha',
+130 silly addNameRange     '1.10.24-alpha',
+130 silly addNameRange     '1.10.25-alpha',
+130 silly addNameRange     '1.10.26-alpha',
+130 silly addNameRange     '1.10.27',
+130 silly addNameRange     '1.10.28',
+130 silly addNameRange     '1.10.29',
+130 silly addNameRange     '1.10.30',
+130 silly addNameRange     '1.10.31',
+130 silly addNameRange     '2.0.32',
+130 silly addNameRange     '2.0.33',
+130 silly addNameRange     '2.0.34' ] ]
+131 silly addNamed @types/jquery@2.0.34
+132 verbose addNamed "2.0.34" is a plain semver version for @types/jquery
+133 silly mapToRegistry name @types/jquery
+134 silly mapToRegistry scope (from package name) @types
+135 verbose mapToRegistry no registry URL found in name for scope @types
+136 silly mapToRegistry using default registry
+137 silly mapToRegistry registry https://registry.npmjs.org/
+138 silly mapToRegistry uri https://registry.npmjs.org/@types%2fjquery
+139 verbose addRemoteTarball https://registry.npmjs.org/@types/jquery/-/jquery-2.0.34.tgz not in flight; adding
+140 verbose addRemoteTarball [ 'https://registry.npmjs.org/@types/jquery/-/jquery-2.0.34.tgz',
+140 verbose addRemoteTarball   '27615b369f30e572336126514e74672dda6e3d04' ]
+141 info retry fetch attempt 1 at 13:45:31
+142 info attempt registry request try #1 at 13:45:31
+143 http fetch GET https://registry.npmjs.org/@types/jquery/-/jquery-2.0.34.tgz
+144 http fetch 200 https://registry.npmjs.org/@types/jquery/-/jquery-2.0.34.tgz
+145 silly fetchAndShaCheck shasum 27615b369f30e572336126514e74672dda6e3d04
+146 verbose addTmpTarball C:\Users\D899~1\AppData\Local\Temp\npm-15428-55ef8983\registry.npmjs.org\_40types\jquery\-\jquery-2.0.34.tgz not in flight; adding
+147 verbose addTmpTarball already have metadata; skipping unpack for @types/jquery@2.0.34
+148 verbose correctMkdir C:\Users\Сергей\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+149 silly cache afterAdd @types/jquery@2.0.34
+150 verbose afterAdd C:\Users\Сергей\AppData\Roaming\npm-cache\@types\jquery\2.0.34\package\package.json not in flight; writing
+151 verbose correctMkdir C:\Users\Сергей\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+152 verbose afterAdd C:\Users\Сергей\AppData\Roaming\npm-cache\@types\jquery\2.0.34\package\package.json written
+153 silly install resolved [ { name: '@types/jquery',
+153 silly install resolved     version: '2.0.34',
+153 silly install resolved     description: 'TypeScript definitions for jQuery 1.10.x / 2.0.x',
+153 silly install resolved     license: 'MIT',
+153 silly install resolved     author: 'Boris Yankov <https://github.com/borisyankov/>, Christian Hoffmeister <https://github.com/choffmeister>, Steve Fenton <https://github.com/Steve-Fenton>, Diullei Gomes <https://github.com/Diullei>, Tass Iliopoulos <https://github.com/tasoili>, Jason Swearingen <https://github.com/jasons-novaleaf>, Sean Hill <https://github.com/seanski>, Guus Goossens <https://github.com/Guuz>, Kelly Summerlin <https://github.com/ksummerlin>, Basarat Ali Syed <https://github.com/basarat>, Nicholas Wolverson <https://github.com/nwolverson>, Derek Cicerone <https://github.com/derekcicerone>, Andrew Gaspar <https://github.com/AndrewGaspar>, James Harrison Fisher <https://github.com/jameshfisher>, Seikichi Kondo <https://github.com/seikichi>, Benjamin Jackman <https://github.com/benjaminjackman>, Poul Sorensen <https://github.com/s093294>, Josh Strobl <https://github.com/JoshStrobl>, John Reilly <https://github.com/johnnyreilly/>, Dick van den Brink <https://github.com/DickvdBrink>',
+153 silly install resolved     main: '',
+153 silly install resolved     repository:
+153 silly install resolved      { type: 'git',
+153 silly install resolved        url: 'https://www.github.com/DefinitelyTyped/DefinitelyTyped.git' },
+153 silly install resolved     scripts: {},
+153 silly install resolved     dependencies: {},
+153 silly install resolved     peerDependencies: {},
+153 silly install resolved     typings: 'index.d.ts',
+153 silly install resolved     typesPublisherContentHash: '9be3af6dee1bf3e4dd5536a28d01ff4161fb875b02601a83c1740e7f5971f9a0',
+153 silly install resolved     _id: '@types/jquery@2.0.34',
+153 silly install resolved     dist:
+153 silly install resolved      { shasum: '27615b369f30e572336126514e74672dda6e3d04',
+153 silly install resolved        tarball: 'https://registry.npmjs.org/@types/jquery/-/jquery-2.0.34.tgz' },
+153 silly install resolved     maintainers: [ [Object] ],
+153 silly install resolved     _npmUser: { name: 'types', email: 'ts-npm-types@microsoft.com' },
+153 silly install resolved     _npmOperationalInternal:
+153 silly install resolved      { host: 'packages-18-east.internal.npmjs.com',
+153 silly install resolved        tmp: 'tmp/jquery-2.0.34.tgz_1478550577309_0.5573498732410371' },
+153 silly install resolved     directories: {},
+153 silly install resolved     _shasum: '27615b369f30e572336126514e74672dda6e3d04',
+153 silly install resolved     _resolved: 'https://registry.npmjs.org/@types/jquery/-/jquery-2.0.34.tgz',
+153 silly install resolved     _from: '@types/jquery@*' } ]
+154 info install @types/jquery@2.0.34 into C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap
+155 info installOne @types/jquery@2.0.34
+156 verbose installOne of @types/jquery to C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap not in flight; installing
+157 verbose correctMkdir C:\Users\Сергей\AppData\Roaming\npm-cache\_locks correctMkdir not in flight; initializing
+158 verbose lock using C:\Users\Сергей\AppData\Roaming\npm-cache\_locks\types-jquery-db8fadb846284768.lock for C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery
+159 silly install write writing @types/jquery 2.0.34 to C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery
+160 verbose unbuild node_modules\@types\jquery.soap\node_modules\@types\jquery
+161 silly gentlyRm C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery is being purged from base C:\Apache24\htdocs\Angular
+162 verbose gentlyRm don't care about contents; nuking C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery
+163 verbose tar unpack C:\Users\Сергей\AppData\Roaming\npm-cache\@types\jquery\2.0.34\package.tgz
+164 verbose tar unpacking to C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery
+165 silly gentlyRm C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery is being purged
+166 verbose gentlyRm don't care about contents; nuking C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery
+167 silly gunzTarPerm modes [ '777', '666' ]
+168 silly gunzTarPerm extractEntry README.md
+169 silly gunzTarPerm extractEntry index.d.ts
+170 silly gunzTarPerm extractEntry package.json
+171 silly gunzTarPerm extractEntry types-metadata.json
+172 verbose write writing to C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery\package.json
+173 info preinstall @types/jquery@2.0.34
+174 verbose readDependencies loading dependencies from C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery\package.json
+175 verbose readDependencies loading dependencies from C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery\package.json
+176 silly install resolved []
+177 verbose about to build C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery
+178 info build C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery
+179 info linkStuff @types/jquery@2.0.34
+180 silly linkStuff @types/jquery@2.0.34 has C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules as its parent node_modules
+181 verbose linkBins @types/jquery@2.0.34
+182 verbose linkMans @types/jquery@2.0.34
+183 verbose rebuildBundles @types/jquery@2.0.34
+184 info install @types/jquery@2.0.34
+185 info postinstall @types/jquery@2.0.34
+186 verbose unlock done using C:\Users\Сергей\AppData\Roaming\npm-cache\_locks\types-jquery-db8fadb846284768.lock for C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap\node_modules\@types\jquery
+187 verbose about to build C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap
+188 info build C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap
+189 info linkStuff @types/jquery.soap@1.6.28
+190 silly linkStuff @types/jquery.soap@1.6.28 has C:\Apache24\htdocs\Angular\node_modules as its parent node_modules
+191 verbose linkBins @types/jquery.soap@1.6.28
+192 verbose linkMans @types/jquery.soap@1.6.28
+193 verbose rebuildBundles @types/jquery.soap@1.6.28
+194 verbose rebuildBundles [ '@types' ]
+195 info install @types/jquery.soap@1.6.28
+196 info postinstall @types/jquery.soap@1.6.28
+197 verbose unlock done using C:\Users\Сергей\AppData\Roaming\npm-cache\_locks\types-jquery-soap-af0b5d24f5d70955.lock for C:\Apache24\htdocs\Angular\node_modules\@types\jquery.soap
+198 verbose validateInstall loading C:\Apache24\htdocs\Angular\package.json for validation
+199 verbose stack Error: The package rxjs@5.0.0-beta.12 does not satisfy its siblings' peerDependencies requirements!
+199 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\install.js:125:32
+199 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\install.js:268:7
+199 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:142:5
+199 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+199 verbose stack     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:47:24)
+199 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+199 verbose stack     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:47:24)
+199 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+199 verbose stack     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:47:24)
+199 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:263:14
+200 verbose cwd C:\Apache24\htdocs\Angular\ts
+201 error Windows_NT 10.0.10586
+202 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "--save" "@types/jquery.soap"
+203 error node v4.4.1
+204 error npm  v2.14.20
+205 error code EPEERINVALID
+206 error peerinvalid The package rxjs@5.0.0-beta.12 does not satisfy its siblings' peerDependencies requirements!
+206 error peerinvalid Peer @angular/core@2.1.2 wants rxjs@5.0.0-beta.12
+206 error peerinvalid Peer @angular/http@2.1.2 wants rxjs@5.0.0-beta.12
+206 error peerinvalid Peer @angular/router@3.1.2 wants rxjs@5.0.0-beta.12
+206 error peerinvalid Peer angular-in-memory-web-api@0.1.17 wants rxjs@5.0.0-rc.4
+207 verbose exit [ 1, true ]

@@ -1,0 +1,23 @@
+.pr-navbar {
+    background-color: #428bca;
+    box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+    padding: 10pt;
+}
+
+.pr-navbar .active {
+    color: white;
+}
+
+.pr-navbar-item {
+    color: #ebebeb;
+    padding: 10pt;
+    text-decoration: none;
+}
+
+.pr-navbar :hover {
+    color: white;
+    text-decoration: none;
+}
+.pr-total {
+    font-weight: bold;
+}

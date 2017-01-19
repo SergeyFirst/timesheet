@@ -1,0 +1,102 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" (click)="addProject()">
+                    <span class="glyphicon glyphicon-plus" style="font-size: 16px;"></span>
+                    Добавить проект
+                </button>
+                <button type="button" class="btn btn-default" (click)="removeProject()">
+                    <span class="glyphicon glyphicon-trash" style="font-size: 16px;"></span>
+                    Удалить проект
+                </button>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+
+            <!--<form class="form-horizontal" role="form">-->
+                <div class="form-group">
+                    <!--<label for="datepicker" class="col-sm-2 control-label">Дата</label>-->
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="datepicker" placeholder="ДД.ММ.ГГГГ" [(ngModel)]="myDate" (ngModelChange)="onDateChange($event)">
+                    </div>
+                </div>
+            <!--</form>-->
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="5%"></th>
+                            <th width="5%">#</th>
+                            <th width="10%">Код</th>
+                            <th width="60%">Проект</th>
+                            <th width="15%">Трудозатраты, ч</th>
+                            <th width="5%">Комментарий</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projects-table">
+                        <tbody>
+                            <tr *ngFor="let project of projects">
+                                <td><input type="checkbox" class="project-over-limit" [(ngModel)]="project.checked"></td>
+                                <td>{{project.id}}</td>
+                                <td>{{project.code}}</td>
+                                <td>{{project.name}}</td>
+                                <td><input type="number" min="0" max="24" class="form-control project-hours" [(ngModel)]="project.hours" (ngModelChange)="onHoursChange()"></td>
+                                <td><button type="button" class="btn btn-default btn-sm add-comment" (click)="addComment(project.id - 1)">
+                                        <span class="glyphicon glyphicon-pencil" style="font-size: 16px;"></span> 
+                                        Добавить
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="pr-total" id="app-total">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Итого:</td>
+                                <td id="total-text">{{total}}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-default" id="submit-btn" (click)="saveProjects()">
+                        <span class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"></span>
+                        Сохранить
+                    </button>
+                </div>
+            </div>
+        </div>
+
+<table id="timetable"></table>
+
+<div id="MyMessage"></div>
+
+<div id="project-dialog" title="Добавление проектов">
+    <!--<form role="form" id="all-projects-table">-->
+        <div *ngFor="let projectForSelectionLine of projectsForSelection">
+            <label>{{projectForSelectionLine.customer}}</label>
+            <div class="checkbox" *ngFor="let projectForSelection of projectForSelectionLine.projectsForSelection">
+                <label><input type="checkbox" class="all-project-input" [(ngModel)]="projectForSelection.checked">{{projectForSelection.name}}></label>
+            </div>
+        </div>
+    <!--</form>-->
+</div>
+
+<div id="comment-dialog" title="Введите текст комментария">
+    <form role="form">
+        <input type="hidden" id="comment-id">
+        <textarea class="form-control" rows="3" id="comment-text"></textarea>
+    </form>
+</div>
+
+<div id="result-dialog" title="">
+    <p>
+        <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+        {{saveProjectResult}}
+    </p>
+</div>
