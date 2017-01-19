@@ -1,2 +1,6 @@
 node_modules/
 .vscode
+ts_app/config.ts
+app/config.js
+ts_report/config.ts
+report/config.js
