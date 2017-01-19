@@ -214,10 +214,15 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.lockForm = function () {
         $("#submit-btn").attr("disabled", "disabled");
-        $("#submit-btn").attr("disabled", "disabled");
+        $("#datepicker").attr("disabled", "disabled");
+        $("#add-project-btn").attr("disabled", "disabled");
+        $("#remove-project-btn").attr("disabled", "disabled");
     };
     AppComponent.prototype.unlockForm = function () {
         $("#submit-btn").attr("disabled", false);
+        $("#datepicker").attr("disabled", false);
+        $("#add-project-btn").attr("disabled", false);
+        $("#remove-project-btn").attr("disabled", false);
     };
     return AppComponent;
 }());
