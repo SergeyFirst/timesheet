@@ -59,11 +59,11 @@ export class AppComponent {
     myDate: string = "";
     email: string = "";
     saveProjectResult: string = "";
-    
+
     constructor(private ProjectSevice: ProjectService, private ProjectForSelectionSevice: ProjectForSelectionService, private SaveProjectsService: SaveProjectsService) {
         var formatter = new Intl.DateTimeFormat("ru");
         this.myDate = formatter.format(new Date);
-        this.email = Office.context.mailbox.userProfile.emailAddress;        
+        this.email = Office.context.mailbox.userProfile.emailAddress;
     }
     ngOnInit() {
         this.getProjectsData()
@@ -98,7 +98,7 @@ export class AppComponent {
         });
 
         this.projectsForSelection = [];
-        this.ProjectForSelectionSevice.getData(this.email, this.convertDate(this.myDate),token).then((data: any, textStatus: string, jqXHR: JQueryXHR) => {
+        this.ProjectForSelectionSevice.getData(this.email, this.convertDate(this.myDate), token).then((data: any, textStatus: string, jqXHR: JQueryXHR) => {
 
             let jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
             let jData = $.parseJSON(jsonString)['#value'];
@@ -212,6 +212,23 @@ export class AppComponent {
         $("#comment-dialog").dialog("open");
     }
     saveProjects() {
+        let total: number = 0;
+        for (let i: number = 0; i < this.projects.length; i++) {
+            total = total + this.projects[i].hours;
+            if (this.projects[i].hours > 24) {
+                this.showMessage("Трудозатраты по проекту не могут превышать 24 часа");
+                return;
+            };
+            if (this.projects[i].hours < 0) {
+                this.showMessage("Трудозатраты по проекту не могут быть отрицательными");
+                return;
+            };
+        }
+        if (total > 24) {
+            this.showMessage("Трудозатраты за день не могут превышать 24 часа");
+            return;
+        };
+        
         this.lockForm();
         Office.context.mailbox.getUserIdentityTokenAsync(asyncResult => {
             this.saveProjectsAssync(asyncResult.value)
@@ -225,8 +242,7 @@ export class AppComponent {
             this.unlockForm();
 
             if (jData[0].Result == true) {
-                this.saveProjectResult = jData[0].Message;
-                $('#result-dialog').dialog("open");
+                this.showMessage(jData[0].Message);
             }
 
         });
@@ -235,34 +251,38 @@ export class AppComponent {
         this.total = this.projects.reduce(function (sum, current) { return (sum + current.hours); }, 0);
     }
     onDateChange(dateRU: string, date: any) {
-         if (String(new Date(this.convertDate(this.myDate))) != 'Invalid Date' && this.myDate.length == 10) {
+        if (String(new Date(this.convertDate(this.myDate))) != 'Invalid Date' && this.myDate.length == 10) {
             this.getProjectsData();
             //this.hide();
-         }
+        }
     }
     convertDate(dateRU: string) {
         dateRU = "" + dateRU.replace(new RegExp(String.fromCharCode(8206), 'g'), "");
         let result: string = "" + dateRU.charAt(6) + dateRU.charAt(7) + dateRU.charAt(8) + dateRU.charAt(9) + "-" + dateRU.charAt(3) + dateRU.charAt(4) + "-" + dateRU.charAt(0) + dateRU.charAt(1);
         return result;
     }
+    showMessage(message: string) {
+        this.saveProjectResult = message;
+        $('#result-dialog').dialog("open");
+    }
     lockForm() {
-        $("#submit-btn").attr("disabled","disabled");
-        $("#datepicker").attr("disabled","disabled");
-        $("#add-project-btn").attr("disabled","disabled");
-        $("#remove-project-btn").attr("disabled","disabled");
-        $(".project-checked").attr("disabled","disabled");
-        $(".project-hours").attr("disabled","disabled");
-        $(".add-comment").attr("disabled","disabled");
+        $("#submit-btn").attr("disabled", "disabled");
+        $("#datepicker").attr("disabled", "disabled");
+        $("#add-project-btn").attr("disabled", "disabled");
+        $("#remove-project-btn").attr("disabled", "disabled");
+        $(".project-checked").attr("disabled", "disabled");
+        $(".project-hours").attr("disabled", "disabled");
+        $(".add-comment").attr("disabled", "disabled");
     }
 
     unlockForm() {
         $("#submit-btn").attr("disabled", false);
         $("#datepicker").attr("disabled", false);
         $("#add-project-btn").attr("disabled", false);
-        $("#remove-project-btn").attr("disabled",false);
-        $(".project-checked").attr("disabled",false);
-        $(".project-hours").attr("disabled",false);
-        $(".add-comment").attr("disabled",false);
+        $("#remove-project-btn").attr("disabled", false);
+        $(".project-checked").attr("disabled", false);
+        $(".project-hours").attr("disabled", false);
+        $(".add-comment").attr("disabled", false);
     }
 
 }

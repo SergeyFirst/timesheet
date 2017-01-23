@@ -188,6 +188,25 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.saveProjects = function () {
         var _this = this;
+        var total = 0;
+        for (var i = 0; i < this.projects.length; i++) {
+            total = total + this.projects[i].hours;
+            if (this.projects[i].hours > 24) {
+                this.showMessage("Трудозатраты по проекту не могут превышать 24 часа");
+                return;
+            }
+            ;
+            if (this.projects[i].hours < 0) {
+                this.showMessage("Трудозатраты по проекту не могут быть отрицательными");
+                return;
+            }
+            ;
+        }
+        if (total > 24) {
+            this.showMessage("Трудозатраты за день не могут превышать 24 часа");
+            return;
+        }
+        ;
         this.lockForm();
         Office.context.mailbox.getUserIdentityTokenAsync(function (asyncResult) {
             _this.saveProjectsAssync(asyncResult.value);
@@ -200,8 +219,7 @@ var AppComponent = (function () {
             var jData = $.parseJSON(jsonString)["#value"];
             _this.unlockForm();
             if (jData[0].Result == true) {
-                _this.saveProjectResult = jData[0].Message;
-                $('#result-dialog').dialog("open");
+                _this.showMessage(jData[0].Message);
             }
         });
     };
@@ -217,6 +235,10 @@ var AppComponent = (function () {
         dateRU = "" + dateRU.replace(new RegExp(String.fromCharCode(8206), 'g'), "");
         var result = "" + dateRU.charAt(6) + dateRU.charAt(7) + dateRU.charAt(8) + dateRU.charAt(9) + "-" + dateRU.charAt(3) + dateRU.charAt(4) + "-" + dateRU.charAt(0) + dateRU.charAt(1);
         return result;
+    };
+    AppComponent.prototype.showMessage = function (message) {
+        this.saveProjectResult = message;
+        $('#result-dialog').dialog("open");
     };
     AppComponent.prototype.lockForm = function () {
         $("#submit-btn").attr("disabled", "disabled");
