@@ -15,13 +15,14 @@ var save_projects_service_1 = require("./save.projects.service");
 var core_2 = require("@angular/core");
 core_2.enableProdMode();
 var Project = (function () {
-    function Project(id, name, code, hours, overLimit, comment) {
+    function Project(id, name, code, hours, overLimit, comment, favorite) {
         this.id = id;
         this.name = name;
         this.code = code;
         this.hours = hours;
         this.overLimit = overLimit;
         this.comment = comment;
+        this.favorite = favorite;
     }
     return Project;
 }());
@@ -36,10 +37,10 @@ var ProjectForSelection = (function () {
 exports.ProjectForSelection = ProjectForSelection;
 var ProjectForSelectionLine = (function () {
     function ProjectForSelectionLine(customer, project) {
-        this.projectsForSelection = [];
+        this.projects = [];
         this.customer = customer;
-        this.projectsForSelection = [];
-        this.projectsForSelection.push(project);
+        this.projects = [];
+        this.projects.push(project);
     }
     return ProjectForSelectionLine;
 }());
@@ -55,9 +56,17 @@ var AppComponent = (function () {
         this.myDate = "";
         this.email = "";
         this.saveProjectResult = "";
+        this.favoriteProjects = [];
         var formatter = new Intl.DateTimeFormat("ru");
-        this.myDate = formatter.format(new Date);
         this.email = Office.context.mailbox.userProfile.emailAddress;
+        var subject = Office.context.mailbox.item.subject;
+        var result = subject.match("(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}");
+        if (result.length == 0) {
+            this.myDate = formatter.format(new Date);
+        }
+        else {
+            this.myDate = result[0];
+        }
     }
     AppComponent.prototype.ngOnInit = function () {
         this.getProjectsData();
@@ -65,6 +74,12 @@ var AppComponent = (function () {
     AppComponent.prototype.getProjectsData = function () {
         var _this = this;
         this.lockForm();
+        //Чтение избранных проектов
+        var favoritesValue = this.getCookie("favorites");
+        if (favoritesValue != undefined) {
+            this.favoriteProjects = favoritesValue.split(";");
+        }
+        //Получение данных по трудозатратам и доступным проектам
         Office.context.mailbox.getUserIdentityTokenAsync(function (asyncResult) {
             _this.getProjectsDataAssync(asyncResult.value);
         });
@@ -73,29 +88,47 @@ var AppComponent = (function () {
         var _this = this;
         $("#submit-btn").attr("disabled", false);
         this.projects = [];
-        this.ProjectSevice.getData(this.email, this.convertDate(this.myDate), token).then(function (data, textStatus, jqXHR) {
-            var jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
-            var jData = $.parseJSON(jsonString)['#value'];
-            for (var i = 0; i < jData.length; i++) {
-                _this.projects.push(new Project(_this.projects.length + 1, jData[i].ProjectName, jData[i].ProjectCode, jData[i].Hours, jData[i].OverLimit, jData[i].Comment));
-            }
-            _this.onHoursChange();
-            _this.unlockForm();
-        });
         this.projectsForSelection = [];
-        this.ProjectForSelectionSevice.getData(this.email, this.convertDate(this.myDate), token).then(function (data, textStatus, jqXHR) {
-            var jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
-            var jData = $.parseJSON(jsonString)['#value'];
-            for (var i = 0; i < jData.length; i++) {
-                var customerArray = _this.projectsForSelection.filter(function (val) { return val.customer == jData[i].Customer; });
-                if (customerArray.length == 0) {
-                    _this.projectsForSelection.push(new ProjectForSelectionLine(jData[i].Customer, new ProjectForSelection(jData[i].Name, jData[i].Code)));
+        //Дождёмся загрузки всех ассинхронных вызовов
+        Promise.all([
+            this.ProjectSevice.getData(this.email, this.convertDate(this.myDate), token).then(function (data, textStatus, jqXHR) {
+                var jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
+                var jData = $.parseJSON(jsonString)['#value'];
+                for (var i = 0; i < jData.length; i++) {
+                    _this.projects.push(new Project(_this.projects.length + 1, jData[i].ProjectName, jData[i].ProjectCode, jData[i].Hours, jData[i].OverLimit, jData[i].Comment, _this.favoriteProjects.indexOf(jData[i].ProjectCode) != -1));
                 }
-                else {
-                    customerArray[0].projectsForSelection.push(new ProjectForSelection(jData[i].Name, jData[i].Code));
+                _this.onHoursChange();
+                _this.unlockForm();
+            }),
+            this.ProjectForSelectionSevice.getData(this.email, this.convertDate(this.myDate), token).then(function (data, textStatus, jqXHR) {
+                var jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
+                var jData = $.parseJSON(jsonString)['#value'];
+                for (var i = 0; i < jData.length; i++) {
+                    var customerArray = _this.projectsForSelection.filter(function (val) { return val.customer == jData[i].Customer; });
+                    if (customerArray.length == 0) {
+                        _this.projectsForSelection.push(new ProjectForSelectionLine(jData[i].Customer, new ProjectForSelection(jData[i].Name, jData[i].Code)));
+                    }
+                    else {
+                        customerArray[0].projects.push(new ProjectForSelection(jData[i].Name, jData[i].Code));
+                    }
                 }
+            })
+        ]).then(function (result) {
+            var _loop_1 = function (i) {
+                var element = _this.projects.find(function (value, index, obj) { return value.code == _this.favoriteProjects[i]; });
+                if (element == undefined) {
+                    for (var j0 = 0; j0 < _this.projectsForSelection.length; j0++) {
+                        for (var j1 = 0; j1 < _this.projectsForSelection[j0].projects.length; j1++) {
+                            if (_this.favoriteProjects[i] == _this.projectsForSelection[j0].projects[j1].code) {
+                                _this.projects.push(new Project(_this.projects.length + 1, _this.projectsForSelection[j0].projects[j1].name, _this.projectsForSelection[j0].projects[j1].code, 0, false, "", true));
+                            }
+                        }
+                    }
+                }
+            };
+            for (var i = 0; i < _this.favoriteProjects.length; i++) {
+                _loop_1(i);
             }
-            //this.unlockForm();
         });
     };
     AppComponent.prototype.ngAfterViewInit = function () {
@@ -109,7 +142,6 @@ var AppComponent = (function () {
             onSelect: function (dateRU, date) {
                 _this.myDate = dateRU;
                 _this.getProjectsData();
-                //$("#datepicker").datepicker("hide");
             }
         });
         //Дилог добавления проектов
@@ -118,9 +150,9 @@ var AppComponent = (function () {
             buttons: {
                 OK: function () {
                     for (var i = 0; i < _this.projectsForSelection.length; i++) {
-                        for (var j = 0; j < _this.projectsForSelection[i].projectsForSelection.length; j++) {
-                            if (_this.projectsForSelection[i].projectsForSelection[j].checked) {
-                                _this.projects.push(new Project(_this.projects.length + 1, _this.projectsForSelection[i].projectsForSelection[j].name, _this.projectsForSelection[i].projectsForSelection[j].code, 0, false, ""));
+                        for (var j = 0; j < _this.projectsForSelection[i].projects.length; j++) {
+                            if (_this.projectsForSelection[i].projects[j].checked) {
+                                _this.projects.push(new Project(_this.projects.length + 1, _this.projectsForSelection[i].projects[j].name, _this.projectsForSelection[i].projects[j].code, 0, false, "", _this.favoriteProjects.indexOf(_this.projectsForSelection[i].projects[j].code) != -1));
                             }
                         }
                     }
@@ -162,8 +194,8 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.addProject = function () {
         for (var i = 0; i < this.projectsForSelection.length; i++) {
-            for (var j = 0; j < this.projectsForSelection[i].projectsForSelection.length; j++) {
-                this.projectsForSelection[i].projectsForSelection[j].checked = false;
+            for (var j = 0; j < this.projectsForSelection[i].projects.length; j++) {
+                this.projectsForSelection[i].projects[j].checked = false;
             }
         }
         $("#project-dialog").dialog("open");
@@ -173,18 +205,26 @@ var AppComponent = (function () {
             this.projects[i].id = i + 1;
         }
     };
-    AppComponent.prototype.removeProject = function () {
-        for (var i = this.projects.length - 1; i >= 0; i--) {
-            if (this.projects[i].checked) {
-                this.projects.splice(i, 1);
-            }
-        }
+    AppComponent.prototype.removeProject = function (id) {
+        this.projects.splice(id, 1);
         this.renumberProjects();
+        this.ngOnChanges();
     };
     AppComponent.prototype.addComment = function (id) {
         $("#comment-id").val(id);
         $("#comment-text").val(this.projects[id].comment);
         $("#comment-dialog").dialog("open");
+    };
+    AppComponent.prototype.addProjectToFavorites = function (id) {
+        this.projects[id].favorite = !this.projects[id].favorite;
+        var searchResult = this.favoriteProjects.indexOf(this.projects[id].code);
+        if (searchResult == -1) {
+            this.favoriteProjects.push(this.projects[id].code);
+        }
+        else {
+            this.favoriteProjects.splice(searchResult, 1);
+        }
+        this.setCookie("favorites", this.favoriteProjects.join(";"), { expires: 30 * 60 * 60 * 24 });
     };
     AppComponent.prototype.saveProjects = function () {
         var _this = this;
@@ -215,12 +255,10 @@ var AppComponent = (function () {
     AppComponent.prototype.saveProjectsAssync = function (token) {
         var _this = this;
         this.SaveProjectsService.saveData(this.projects, this.email, this.convertDate(this.myDate), token).then(function (data, textStatus, jqXHR) {
+            _this.unlockForm();
             var jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
             var jData = $.parseJSON(jsonString)["#value"];
-            _this.unlockForm();
-            if (jData[0].Result == true) {
-                _this.showMessage(jData[0].Message);
-            }
+            _this.showMessage(jData[0].Message);
         });
     };
     AppComponent.prototype.onHoursChange = function () {
@@ -258,12 +296,39 @@ var AppComponent = (function () {
         $(".project-hours").attr("disabled", false);
         $(".add-comment").attr("disabled", false);
     };
+    AppComponent.prototype.setCookie = function (name, value, options) {
+        options = options || {};
+        var expires = options.expires;
+        if (typeof expires == "number" && expires) {
+            var d = new Date();
+            d.setTime(d.getTime() + expires * 1000);
+            expires = options.expires = d;
+        }
+        if (expires && expires.toUTCString) {
+            options.expires = expires.toUTCString();
+        }
+        value = encodeURIComponent(value);
+        var updatedCookie = name + "=" + value;
+        for (var propName in options) {
+            updatedCookie += "; " + propName;
+            var propValue = options[propName];
+            if (propValue !== true) {
+                updatedCookie += "=" + propValue;
+            }
+        }
+        document.cookie = updatedCookie;
+    };
+    AppComponent.prototype.getCookie = function (name) {
+        var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
         templateUrl: './app/app.component.tmp.html',
+        styles: [".favorite{background-color: #e0e0eb; border-color: #e0e0eb;}"],
         providers: [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService]
     }),
     __metadata("design:paramtypes", [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService])

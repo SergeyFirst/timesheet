@@ -7,10 +7,10 @@
                     <span class="glyphicon glyphicon-plus" style="font-size: 16px;"></span>
                     Добавить проект
                 </button>
-                <button type="button" class="btn btn-default" id="remove-project-btn" (click)="removeProject()">
+                <!--<button type="button" class="btn btn-default" id="remove-project-btn" (click)="removeProject()">
                     <span class="glyphicon glyphicon-trash" style="font-size: 16px;"></span>
                     Удалить проект
-                </button>
+                </button>-->
             </div>
         </div>
         <div class="col-md-3">
@@ -32,37 +32,44 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="5%"></th>
                             <th width="5%">#</th>
                             <th width="10%">Код</th>
-                            <th width="60%">Проект</th>
+                            <th width="55%">Проект</th>
                             <th width="15%">Трудозатраты, ч</th>
-                            <th width="5%">Комментарий</th>
+                            <th width="5%"></th>
+                            <th width="5%"></th>
+                            <th width="5%"></th>
                         </tr>
                     </thead>
                     <tbody id="projects-table">
-                        <tbody>
-                            <tr *ngFor="let project of projects">
-                                <td><input type="checkbox" class="project-checked" [(ngModel)]="project.checked"></td>
-                                <td>{{project.id}}</td>
-                                <td>{{project.code}}</td>
-                                <td>{{project.name}}</td>
-                                <td><input type="number" min="0" max="24" class="form-control project-hours" [(ngModel)]="project.hours" (ngModelChange)="onHoursChange()"></td>
-                                <td><button type="button" class="btn btn-default btn-sm add-comment" (click)="addComment(project.id - 1)">
-                                        <span class="glyphicon glyphicon-pencil" style="font-size: 16px;"></span> 
-                                        Добавить
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="pr-total" id="app-total">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>Итого:</td>
-                                <td id="total-text">{{total}}</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
+                        <tr *ngFor="let project of projects">
+                            <td>{{project.id}}</td>
+                            <td>{{project.code}}</td>
+                            <td>{{project.name}}</td>
+                            <td><input type="number" min="0" max="24" class="form-control project-hours" [(ngModel)]="project.hours" (ngModelChange)="onHoursChange()"></td>
+                            <td><button type="button" class="btn btn-default btn-sm add-comment" (click)="addComment(project.id - 1)" title="Добавить комментарий">
+                                    <span class="glyphicon glyphicon-pencil" style="font-size: 16px;"></span> 
+                                </button>
+                            </td>
+                            <td><button type="button" class="btn btn-default btn-sm" (click)="removeProject(project.id - 1)" title="Удалить проект">
+                                    <span class="glyphicon glyphicon-trash" style="font-size: 16px;"></span>
+                                </button>
+                            </td>
+                            <td><button type="button" class="btn btn-default btn-sm" (click)="addProjectToFavorites(project.id - 1)" [ngClass]="{favorite: project.favorite}" title="Добавить в избранное">
+                                    <span class="glyphicon glyphicon-star-empty" style="font-size: 16px;"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="pr-total" id="app-total">
+                            <td></td>
+                            <td></td>
+                            <td>Итого:</td>
+                            <td id="total-text">{{total}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
                     </table>
                     <button type="submit" class="btn btn-default" id="submit-btn" (click)="saveProjects()">
                         <span class="glyphicon glyphicon-ok-sign" style="font-size: 16px;"></span>
@@ -78,10 +85,10 @@
 
 <div id="project-dialog" title="Добавление проектов">
     <!--<form role="form" id="all-projects-table">-->
-        <div *ngFor="let projectForSelectionLine of projectsForSelection">
-            <label>{{projectForSelectionLine.customer}}</label>
-            <div class="checkbox" *ngFor="let projectForSelection of projectForSelectionLine.projectsForSelection">
-                <label><input type="checkbox" class="all-project-input" [(ngModel)]="projectForSelection.checked">{{projectForSelection.name}}></label>
+        <div *ngFor="let projectLine of projectsForSelection">
+            <label>{{projectLine.customer}}</label>
+            <div class="checkbox" *ngFor="let project of projectLine.projects">
+                <label><input type="checkbox" class="all-project-input" [(ngModel)]="project.checked">{{project.name}}></label>
             </div>
         </div>
     <!--</form>-->
