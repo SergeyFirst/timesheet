@@ -26,8 +26,9 @@ var Report = (function () {
 }());
 exports.Report = Report;
 var ReportComponent = (function () {
-    function ReportComponent(ReportSevice) {
+    function ReportComponent(ReportSevice, ref) {
         this.ReportSevice = ReportSevice;
+        this.ref = ref;
         this.report = [];
         this.total = 0;
         this.dateBegin = "";
@@ -62,6 +63,7 @@ var ReportComponent = (function () {
                 _this.report.push(new Report(jData[i].Date, jData[i].ProjectName, jData[i].ProjectCode, jData[i].Hours, jData[i].OverLimit, jData[i].Comment, jData[i].Accepted));
                 _this.total += jData[i].Hours;
             }
+            _this.ref.detectChanges();
         });
     };
     ReportComponent.prototype.ngAfterViewInit = function () {
@@ -107,7 +109,7 @@ ReportComponent = __decorate([
         templateUrl: './report/report.component.tmp.html',
         providers: [report_service_1.ReportService]
     }),
-    __metadata("design:paramtypes", [report_service_1.ReportService])
+    __metadata("design:paramtypes", [report_service_1.ReportService, core_1.ChangeDetectorRef])
 ], ReportComponent);
 exports.ReportComponent = ReportComponent;
 //# sourceMappingURL=report.component.js.map

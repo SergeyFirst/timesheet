@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ReportService } from './report.service';
 import { enableProdMode } from '@angular/core';
 
@@ -38,7 +38,7 @@ export class ReportComponent {
     booleanMap: any = {true:'+',false:''};    
     token: string;
 
-    constructor(private ReportSevice: ReportService) {
+    constructor(private ReportSevice: ReportService, private ref: ChangeDetectorRef) {
         //Установим дату начала и окончания отчета
         let dateBegin: Date = new Date
         dateBegin.setDate(1);
@@ -78,6 +78,7 @@ export class ReportComponent {
                                             jData[i].Accepted));
                this.total += jData[i].Hours;
             }
+            this.ref.detectChanges();
         });
     }    
     ngAfterViewInit() {

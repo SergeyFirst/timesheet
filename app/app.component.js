@@ -46,10 +46,11 @@ var ProjectForSelectionLine = (function () {
 }());
 exports.ProjectForSelectionLine = ProjectForSelectionLine;
 var AppComponent = (function () {
-    function AppComponent(ProjectSevice, ProjectForSelectionSevice, SaveProjectsService) {
+    function AppComponent(ProjectSevice, ProjectForSelectionSevice, SaveProjectsService, ref) {
         this.ProjectSevice = ProjectSevice;
         this.ProjectForSelectionSevice = ProjectForSelectionSevice;
         this.SaveProjectsService = SaveProjectsService;
+        this.ref = ref;
         this.projects = [];
         this.projectsForSelection = [];
         this.total = 0;
@@ -129,6 +130,7 @@ var AppComponent = (function () {
             for (var i = 0; i < _this.favoriteProjects.length; i++) {
                 _loop_1(i);
             }
+            _this.ref.detectChanges();
         });
     };
     AppComponent.prototype.ngAfterViewInit = function () {
@@ -331,7 +333,7 @@ AppComponent = __decorate([
         styles: [".favorite{background-color: #e0e0eb; border-color: #e0e0eb;}"],
         providers: [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService]
     }),
-    __metadata("design:paramtypes", [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService])
+    __metadata("design:paramtypes", [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService, core_1.ChangeDetectorRef])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

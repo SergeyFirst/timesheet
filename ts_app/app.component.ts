@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ProjectService } from './projects.service';
 import { ProjectForSelectionService } from './projects.for.selection.service';
 import { SaveProjectsService } from './save.projects.service';
@@ -64,7 +64,7 @@ export class AppComponent {
     saveProjectResult: string = "";
     favoriteProjects: string[] = [];
 
-    constructor(private ProjectSevice: ProjectService, private ProjectForSelectionSevice: ProjectForSelectionService, private SaveProjectsService: SaveProjectsService) {
+    constructor(private ProjectSevice: ProjectService, private ProjectForSelectionSevice: ProjectForSelectionService, private SaveProjectsService: SaveProjectsService, private ref: ChangeDetectorRef) {
         var formatter = new Intl.DateTimeFormat("ru");
         this.email = Office.context.mailbox.userProfile.emailAddress;
         let subject: string = Office.context.mailbox.item.subject;
@@ -155,6 +155,7 @@ export class AppComponent {
                         }
                     }
                 }
+                this.ref.detectChanges();
             }
             
 
