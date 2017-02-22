@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Инструкция по согласованию фактических трудозатрат</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="./css/sticky-footer.css" rel="stylesheet">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <!-- Just for debugging purposes. Don't actually copy this line! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <!-- Begin page content -->
+  <div class="container">
+    <div class="page-header">
+      <h1>Инструкция по согасованию фактических трудозатрат</h1>
+    </div>
+    <p class="lead">1. Создание документа "Согласование трудозатрат по проектам"</p>
+    <p>Для создания документа "Согласование трудозатрат по проектам" необходимо:
+    <ul>
+        <li>Зайти в <b>1С:Управление холдингом</b></li>
+        <li>Перейти на закладку <b>"Учёт трудозатрат"</b></li>
+        <li>Выбрать пункт <b>"Согласование трудозатрат по проектам"</b></li>
+        <li>Нажать на кнопку <b>"Создать"</b></li>
+    </ul>
+    <p><img src="./img/greate_confirmation.gif"></p>
+    
+
+    <br>
+    <p class="lead">2. Заполнение документа "Согласование трудозатрат по проектам"</p>
+    <p>Для заполнение документа необходимо выполнить следующие операции:</p>
+    <ul>
+      <li>Указать период заполнения (по-умолчанию выбирается прошлая неделя)</li>
+      <li>Указать руководителя проекта (по умолчанию указывается текущий пользователь)</li>
+      <li>Нажать на кнопку <b>"Заполнить"</b></li>
+    </ul>
+    <p><img src="./img/fill_confirmation.gif"></p>
+
+    <br>
+    <p class="lead">3. Проверка и корректировка трудозатрат"</p>
+    <p>Для удобства проверки трудозтарат по проекту можно воспользоваться возможностью группировки данных трудозатрат в правой части формы документа.
+      Для этого необходимо раположить группировки в нужной последовательности. Для сворачивания/разворачивания дерева данных можно воспользоваться кнопками меню <b>[1|2|3|4]</b></p>    
+      <p><img src="./img/group_confirmation.gif"></p>
+    <p>Корректировку трудозатрат необходимо осуществлять в колонке <b>"Часы РП"</b>. Корректировку можно усуществлять как на детальном уровне, так и на более высоком уровне (пересчёт детальных записей осуществляется пропорционально ранее внесённым данным). Для выделения откорректированных строк необходимо "активировать" кнопку <b>"Выделять строки"</b>.</p>
+    <p>В колонке <b>"Комментарий"</b> можно указать комментарий.</p>
+    <p><img src="./img/change_confirmation.gif"></p>
+    <p class="lead">3. Сохранение и отправка на согласование в HR"</p>
+    <p>Для сохранения внесённых данных и пердачи их на последующее согласование в HR необходимо выполнить следующие действия:
+    <ul>
+      <li>Нажать на кнопку <b>"Провести и закрыть"</b></li>
+      <li>В меню согласование выбрать пункт <b>"На согласование"</b></li>
+      <li>Обновить данные списка нажав на кнопку F5</b></li>
+      <li>Убедиться что состояние согласования изменилось на <b>"На утверждени"</b></li>
+    </ul>
+    <p><img src="./img/save_confirmation.gif"></p>
+  </div>
+  
+
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">НПО Прогресс</p>
+    </div>
+  </div>
+
+</div>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+
+</body>
+
+</html>
