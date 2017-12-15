@@ -8,13 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var projects_service_1 = require("./projects.service");
 var projects_for_selection_service_1 = require("./projects.for.selection.service");
 var save_projects_service_1 = require("./save.projects.service");
 var core_2 = require("@angular/core");
 core_2.enableProdMode();
-var Project = (function () {
+var Project = /** @class */ (function () {
     function Project(id, name, code, hours, overLimit, comment, favorite) {
         this.id = id;
         this.name = name;
@@ -27,7 +28,7 @@ var Project = (function () {
     return Project;
 }());
 exports.Project = Project;
-var ProjectForSelection = (function () {
+var ProjectForSelection = /** @class */ (function () {
     function ProjectForSelection(name, code) {
         this.name = name;
         this.code = code;
@@ -35,7 +36,7 @@ var ProjectForSelection = (function () {
     return ProjectForSelection;
 }());
 exports.ProjectForSelection = ProjectForSelection;
-var ProjectForSelectionLine = (function () {
+var ProjectForSelectionLine = /** @class */ (function () {
     function ProjectForSelectionLine(customer, project) {
         this.projects = [];
         this.customer = customer;
@@ -45,7 +46,7 @@ var ProjectForSelectionLine = (function () {
     return ProjectForSelectionLine;
 }());
 exports.ProjectForSelectionLine = ProjectForSelectionLine;
-var AppComponent = (function () {
+var AppComponent = /** @class */ (function () {
     function AppComponent(ProjectSevice, ProjectForSelectionSevice, SaveProjectsService, ref) {
         this.ProjectSevice = ProjectSevice;
         this.ProjectForSelectionSevice = ProjectForSelectionSevice;
@@ -324,16 +325,16 @@ var AppComponent = (function () {
         var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
         return matches ? decodeURIComponent(matches[1]) : undefined;
     };
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: 'my-app',
+            templateUrl: './app/app.component.tmp.html',
+            styles: [".favorite{background-color: #e0e0eb; border-color: #e0e0eb;}"],
+            providers: [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService]
+        }),
+        __metadata("design:paramtypes", [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService, core_1.ChangeDetectorRef])
+    ], AppComponent);
     return AppComponent;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'my-app',
-        templateUrl: './app/app.component.tmp.html',
-        styles: [".favorite{background-color: #e0e0eb; border-color: #e0e0eb;}"],
-        providers: [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService]
-    }),
-    __metadata("design:paramtypes", [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService, core_1.ChangeDetectorRef])
-], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

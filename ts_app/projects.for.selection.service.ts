@@ -24,7 +24,8 @@ export class ProjectForSelectionService {
                            </soapenv:Envelope>`,
             HTTPHeaders: {
                 Authorization: 'Basic d2ViOjEyMw=='
-            });
+            }
+        });
 
             return jqPromise;       
 

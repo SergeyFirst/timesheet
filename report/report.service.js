@@ -1,6 +1,7 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var config_1 = require("./config");
-var ReportService = (function () {
+var ReportService = /** @class */ (function () {
     function ReportService() {
     }
     ReportService.prototype.getData = function (email, dateBegin, dateEnd, token) {

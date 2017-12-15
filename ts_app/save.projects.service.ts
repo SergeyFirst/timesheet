@@ -38,9 +38,10 @@ export class SaveProjectsService {
                     </soapenv:Envelope>`,
             HTTPHeaders: {
                 Authorization: 'Basic d2ViOjEyMw=='
-            });
+            }
+        });
 
-            return jqPromise;       
+        return jqPromise;       
 
     }
 }

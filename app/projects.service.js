@@ -1,6 +1,7 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var config_1 = require("./config");
-var ProjectService = (function () {
+var ProjectService = /** @class */ (function () {
     function ProjectService() {
     }
     ProjectService.prototype.getData = function (email, date, token) {

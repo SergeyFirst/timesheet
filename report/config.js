@@ -1,7 +1,8 @@
 "use strict";
-var ConfigData = (function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var ConfigData = /** @class */ (function () {
     function ConfigData() {
-        this.webServerURL = 'https://localhost/test/ws/timesheets?wsdl';
+        this.webServerURL = 'https://hr.regioncom.ru/uh/ws/timesheets?wsdl';
     }
     return ConfigData;
 }());

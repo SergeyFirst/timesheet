@@ -24,9 +24,10 @@ export class ProjectService {
                            </soapenv:Envelope>`,
             HTTPHeaders: {
                 Authorization: 'Basic d2ViOjEyMw=='
-            });
+            }
+          });
 
-            return jqPromise;       
+          return jqPromise;       
 
     }
 }

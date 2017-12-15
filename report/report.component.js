@@ -8,11 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var report_service_1 = require("./report.service");
 var core_2 = require("@angular/core");
 core_2.enableProdMode();
-var Report = (function () {
+var Report = /** @class */ (function () {
     function Report(date, name, code, hours, overLimit, comment, accepted) {
         this.date = date;
         this.name = name;
@@ -25,7 +26,7 @@ var Report = (function () {
     return Report;
 }());
 exports.Report = Report;
-var ReportComponent = (function () {
+var ReportComponent = /** @class */ (function () {
     function ReportComponent(ReportSevice, ref) {
         this.ReportSevice = ReportSevice;
         this.ref = ref;
@@ -101,15 +102,15 @@ var ReportComponent = (function () {
         var result = "" + dateRU.charAt(6) + dateRU.charAt(7) + dateRU.charAt(8) + dateRU.charAt(9) + "-" + dateRU.charAt(3) + dateRU.charAt(4) + "-" + dateRU.charAt(0) + dateRU.charAt(1);
         return result;
     };
+    ReportComponent = __decorate([
+        core_1.Component({
+            selector: 'my-app',
+            templateUrl: './report/report.component.tmp.html',
+            providers: [report_service_1.ReportService]
+        }),
+        __metadata("design:paramtypes", [report_service_1.ReportService, core_1.ChangeDetectorRef])
+    ], ReportComponent);
     return ReportComponent;
 }());
-ReportComponent = __decorate([
-    core_1.Component({
-        selector: 'my-app',
-        templateUrl: './report/report.component.tmp.html',
-        providers: [report_service_1.ReportService]
-    }),
-    __metadata("design:paramtypes", [report_service_1.ReportService, core_1.ChangeDetectorRef])
-], ReportComponent);
 exports.ReportComponent = ReportComponent;
 //# sourceMappingURL=report.component.js.map
