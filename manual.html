@@ -19,6 +19,7 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="./node_modules/jquery/dist/jquery.min.js"></script>
   <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="./node_modules/bootstrap/js/carousel.js"></script>
 
   <!-- Just for debugging purposes. Don't actually copy this line! -->
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -42,27 +43,50 @@
     </div>
     <p class="lead">1. Установка Timesheet в Outlook (только при первом заполнении)</p>
     <p>Установка Timesheet разлиачется в зависимость от версии Outlook (web,desktop)</p>
-    <p>Если вы пользуетесь MAC OS или Linux, то необходимо воспользоваться web версией <a href = "https://outlook.office.com/owa/">Outlook<a></p>
-    <p>Для установки следует использовать следующую ссылку: <b>https://holding-online.ru/timesheet.xml</b></p>
 
-    <div class="bs-example bs-example-tabs">
-      <ul id="myTab" class="nav nav-tabs">
-        <li class="active"><a href="#web" data-toggle="tab">Web версия</a></li>
-
-        <li><a href="#desktop" data-toggle="tab">Desktop версия</a>
-
-        </li>
-
-      </ul>
-      <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="web">
-          <img src="./img/web.gif">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+    
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="./img/man1.png" alt="">
+          <div class="carousel-caption">
+            <p>Выберите раздел настроек</p>
+          </div>
         </div>
-        <div class="tab-pane fade" id="desktop">
-          <img src="./img/desktop.gif">
+        <div class="item">
+          <img src="./img/man2.png" alt="">
+          <div class="carousel-caption">
+            <p>Выберите пункт управление надстройками</p>
+          </div>
         </div>
-
+        <div class="item">
+          <img src="./img/man3.png" alt="">
+          <div class="carousel-caption">
+            <p>Добавьте файл манифеста</p>
+          </div>
+        </div>
+        <div class="item">
+          <img src="./img/man4.png" alt="">
+          <div class="carousel-caption">
+            <p>Убедитесь, что приложение добавилось</p>
+          </div>
+        </div>
       </div>
+    
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
     </div>
 
     <br>
