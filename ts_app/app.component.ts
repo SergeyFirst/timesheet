@@ -278,7 +278,7 @@ saveProjects() {
             this.showMessage("Трудозатраты по проекту не могут быть отрицательными");
             return;
         };
-        if (this.projects[i].hours != 0 && this.projects[i].comment.trim() == "") {
+        if (this.projects[i].hours && this.projects[i].comment.trim() == "") {
             this.showMessage("Необходимо заполнить комментарии по всем проектам");
             return;
         }
