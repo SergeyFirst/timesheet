@@ -244,6 +244,10 @@ var AppComponent = /** @class */ (function () {
                 return;
             }
             ;
+            if (this.projects[i].hours != 0 && this.projects[i].comment.trim() == "") {
+                this.showMessage("Необходимо заполнить комментарии по всем проектам");
+                return;
+            }
         }
         if (total > 24) {
             this.showMessage("Трудозатраты за день не могут превышать 24 часа");
@@ -329,12 +333,13 @@ var AppComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'my-app',
             templateUrl: './app/app.component.tmp.html',
-            styles: [".favorite{background-color: #e0e0eb; border-color: #e0e0eb;}"],
+            styles: [".favorite{background-color: #e0e0eb; border-color: #e0e0eb;};\n              .filled{background-color: #e0e0eb; border-color: #e0e0eb;};"],
             providers: [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService]
         }),
-        __metadata("design:paramtypes", [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService, core_1.ChangeDetectorRef])
+        __metadata("design:paramtypes", [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService, typeof (_a = typeof core_1.ChangeDetectorRef !== "undefined" && core_1.ChangeDetectorRef) === "function" && _a || Object])
     ], AppComponent);
     return AppComponent;
+    var _a;
 }());
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

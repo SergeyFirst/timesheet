@@ -52,7 +52,8 @@ export class ProjectForSelectionLine {
 @Component({
     selector: 'my-app',
     templateUrl: './app/app.component.tmp.html',
-    styles: [`.favorite{background-color: #e0e0eb; border-color: #e0e0eb;}`],
+    styles: [`.favorite{background-color: #e0e0eb; border-color: #e0e0eb;};
+              .filled{background-color: #e0e0eb; border-color: #e0e0eb;};`],
     providers: [ProjectService, ProjectForSelectionService, SaveProjectsService]
 })
 export class AppComponent {
@@ -277,6 +278,10 @@ saveProjects() {
             this.showMessage("Трудозатраты по проекту не могут быть отрицательными");
             return;
         };
+        if (this.projects[i].hours != 0 && this.projects[i].comment.trim() == "") {
+            this.showMessage("Необходимо заполнить комментарии по всем проектам");
+            return;
+        }
     }
     if (total > 24) {
         this.showMessage("Трудозатраты за день не могут превышать 24 часа");
