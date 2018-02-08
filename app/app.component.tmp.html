@@ -44,7 +44,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-default btn-sm add-comment" (click)="addComment(project.id - 1)"
-                                [ngClass]="{filled: (project.comment.trim() != '')}" title="Добавить комментарий">
+                                [ngClass]="{filled: project.comment}" title="Добавить комментарий">
                                 <span class="glyphicon glyphicon-pencil" style="font-size: 16px;"></span>
                             </button>
                         </td>
