@@ -1,7 +1,6 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var config_1 = require("./config");
-var ProjectForSelectionService = /** @class */ (function () {
+var ProjectForSelectionService = (function () {
     function ProjectForSelectionService() {
     }
     ProjectForSelectionService.prototype.getData = function (email, date, token) {

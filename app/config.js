@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var ConfigData = /** @class */ (function () {
+var ConfigData = (function () {
     function ConfigData() {
         this.webServerURL = 'https://hr.regioncom.ru/uh/ws/timesheets?wsdl';
     }
