@@ -3,7 +3,7 @@ import { ConfigData } from "./config";
 
 export class ProjectForSelectionService {
 
-    getData(email: string, date: string, token: string): JQueryPromise<any> {
+    getData(email: string, date: string, UUID: string): JQueryPromise<any> {
         
         let configData: ConfigData = new ConfigData;
 
@@ -18,7 +18,8 @@ export class ProjectForSelectionService {
                                    <tim:GetProjectsByEmailJson>
                                        <tim:Email>${email}</tim:Email>
                                        <tim:Date>${date}</tim:Date>
-                                       <tim:Token>${token}</tim:Token>
+                                       <tim:Token></tim:Token>
+                                       <tim:UUID>${UUID}</tim:UUID>
                                    </tim:GetProjectsByEmailJson>
                                </soapenv:Body>
                            </soapenv:Envelope>`,

@@ -8,13 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var projects_service_1 = require("./projects.service");
 var projects_for_selection_service_1 = require("./projects.for.selection.service");
 var save_projects_service_1 = require("./save.projects.service");
 var core_2 = require("@angular/core");
 core_2.enableProdMode();
-var Project = (function () {
+var Project = /** @class */ (function () {
     function Project(id, name, code, hours, overLimit, comment, favorite) {
         this.id = id;
         this.name = name;
@@ -27,7 +28,7 @@ var Project = (function () {
     return Project;
 }());
 exports.Project = Project;
-var ProjectForSelection = (function () {
+var ProjectForSelection = /** @class */ (function () {
     function ProjectForSelection(name, code) {
         this.name = name;
         this.code = code;
@@ -35,7 +36,7 @@ var ProjectForSelection = (function () {
     return ProjectForSelection;
 }());
 exports.ProjectForSelection = ProjectForSelection;
-var ProjectForSelectionLine = (function () {
+var ProjectForSelectionLine = /** @class */ (function () {
     function ProjectForSelectionLine(customer, project) {
         this.projects = [];
         this.customer = customer;
@@ -45,7 +46,7 @@ var ProjectForSelectionLine = (function () {
     return ProjectForSelectionLine;
 }());
 exports.ProjectForSelectionLine = ProjectForSelectionLine;
-var AppComponent = (function () {
+var AppComponent = /** @class */ (function () {
     function AppComponent(ProjectSevice, ProjectForSelectionSevice, SaveProjectsService, ref) {
         this.ProjectSevice = ProjectSevice;
         this.ProjectForSelectionSevice = ProjectForSelectionSevice;
@@ -70,10 +71,20 @@ var AppComponent = (function () {
         }
     }
     AppComponent.prototype.ngOnInit = function () {
-        this.getProjectsData();
+        var _this = this;
+        Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, function (result) {
+            if (result.status == Office.AsyncResultStatus.Succeeded) {
+                _this.body = result.value;
+                var expr = /\[UUID=(.*)\]/;
+                var UUID = void 0;
+                if ((UUID = expr.exec(_this.body)) !== null) {
+                    _this.UUID = UUID[1];
+                    _this.getProjectsData();
+                }
+            }
+        });
     };
     AppComponent.prototype.getProjectsData = function () {
-        var _this = this;
         this.lockForm();
         //Чтение избранных проектов
         var favoritesValue = this.getCookie("favorites");
@@ -81,18 +92,16 @@ var AppComponent = (function () {
             this.favoriteProjects = favoritesValue.split(";");
         }
         //Получение данных по трудозатратам и доступным проектам
-        Office.context.mailbox.getUserIdentityTokenAsync(function (asyncResult) {
-            _this.getProjectsDataAssync(asyncResult.value);
-        });
+        this.getProjectsDataAssync();
     };
-    AppComponent.prototype.getProjectsDataAssync = function (token) {
+    AppComponent.prototype.getProjectsDataAssync = function () {
         var _this = this;
         $("#submit-btn").attr("disabled", false);
         this.projects = [];
         this.projectsForSelection = [];
         //Дождёмся загрузки всех ассинхронных вызовов
         Promise.all([
-            this.ProjectSevice.getData(this.email, this.convertDate(this.myDate), token).then(function (data, textStatus, jqXHR) {
+            this.ProjectSevice.getData(this.email, this.convertDate(this.myDate), this.UUID).then(function (data, textStatus, jqXHR) {
                 var jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
                 var jData = $.parseJSON(jsonString)['#value'];
                 for (var i = 0; i < jData.length; i++) {
@@ -101,7 +110,7 @@ var AppComponent = (function () {
                 _this.onHoursChange();
                 _this.unlockForm();
             }),
-            this.ProjectForSelectionSevice.getData(this.email, this.convertDate(this.myDate), token).then(function (data, textStatus, jqXHR) {
+            this.ProjectForSelectionSevice.getData(this.email, this.convertDate(this.myDate), this.UUID).then(function (data, textStatus, jqXHR) {
                 var jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
                 var jData = $.parseJSON(jsonString)['#value'];
                 for (var i = 0; i < jData.length; i++) {
@@ -229,7 +238,6 @@ var AppComponent = (function () {
         this.setCookie("favorites", this.favoriteProjects.join(";"), { expires: 30 * 60 * 60 * 24 });
     };
     AppComponent.prototype.saveProjects = function () {
-        var _this = this;
         var total = 0;
         for (var i = 0; i < this.projects.length; i++) {
             total = total + this.projects[i].hours;
@@ -250,13 +258,11 @@ var AppComponent = (function () {
         }
         ;
         this.lockForm();
-        Office.context.mailbox.getUserIdentityTokenAsync(function (asyncResult) {
-            _this.saveProjectsAssync(asyncResult.value);
-        });
+        this.saveProjectsAssync();
     };
-    AppComponent.prototype.saveProjectsAssync = function (token) {
+    AppComponent.prototype.saveProjectsAssync = function () {
         var _this = this;
-        this.SaveProjectsService.saveData(this.projects, this.email, this.convertDate(this.myDate), token).then(function (data, textStatus, jqXHR) {
+        this.SaveProjectsService.saveData(this.projects, this.email, this.convertDate(this.myDate), this.UUID).then(function (data, textStatus, jqXHR) {
             _this.unlockForm();
             var jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
             var jData = $.parseJSON(jsonString)["#value"];
@@ -324,17 +330,17 @@ var AppComponent = (function () {
         var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
         return matches ? decodeURIComponent(matches[1]) : undefined;
     };
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: 'my-app',
+            templateUrl: './app/app.component.tmp.html',
+            styles: [".favorite{background-color: #e0e0eb; border-color: #e0e0eb;};\n              .filled{background-color: #e0e0eb; border-color: #e0e0eb;};"],
+            providers: [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService]
+        }),
+        __metadata("design:paramtypes", [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService, typeof (_a = typeof core_1.ChangeDetectorRef !== "undefined" && core_1.ChangeDetectorRef) === "function" && _a || Object])
+    ], AppComponent);
     return AppComponent;
+    var _a;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'my-app',
-        templateUrl: './app/app.component.tmp.html',
-        styles: [".favorite{background-color: #e0e0eb; border-color: #e0e0eb;};\n              .filled{background-color: #e0e0eb; border-color: #e0e0eb;};"],
-        providers: [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService]
-    }),
-    __metadata("design:paramtypes", [projects_service_1.ProjectService, projects_for_selection_service_1.ProjectForSelectionService, save_projects_service_1.SaveProjectsService, typeof (_a = typeof core_1.ChangeDetectorRef !== "undefined" && core_1.ChangeDetectorRef) === "function" && _a || Object])
-], AppComponent);
 exports.AppComponent = AppComponent;
-var _a;
 //# sourceMappingURL=app.component.js.map

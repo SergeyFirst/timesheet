@@ -3,7 +3,7 @@ import { ConfigData } from "./config";
 
 export class SaveProjectsService {
 
-    saveData(projects: Project[], email: string, date: string, token: string): JQueryPromise<any> {
+    saveData(projects: Project[], email: string, date: string, UUID: string): JQueryPromise<any> {
         
         let configData: ConfigData = new ConfigData;
 
@@ -31,8 +31,9 @@ export class SaveProjectsService {
                                 <tim:SaveHoursJson>
                                     <tim:Email>${email}</tim:Email>
                                     <tim:Date>${date}</tim:Date>
-                                    <tim:Token>${token}</tim:Token>
+                                    <tim:Token></tim:Token>
                                     <tim:ArrayOfHours>${resultText}</tim:ArrayOfHours>
+                                    <tim:UUID>${UUID}</tim:UUID>
                                 </tim:SaveHoursJson>
                             </soapenv:Body>
                     </soapenv:Envelope>`,

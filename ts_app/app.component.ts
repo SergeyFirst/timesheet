@@ -64,6 +64,8 @@ export class AppComponent {
     email: string = "";
     saveProjectResult: string = "";
     favoriteProjects: string[] = [];
+    body: string;
+    UUID: string;
 
     constructor(private ProjectSevice: ProjectService, private ProjectForSelectionSevice: ProjectForSelectionService, private SaveProjectsService: SaveProjectsService, private ref: ChangeDetectorRef) {
         var formatter = new Intl.DateTimeFormat("ru");
@@ -77,8 +79,18 @@ export class AppComponent {
         }
     }
     ngOnInit() {
-        this.getProjectsData();
+        Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, (result) => {
+            if (result.status == Office.AsyncResultStatus.Succeeded) {
+                this.body = result.value;
+                var expr = /\[UUID=(.*)\]/;
+                let UUID;
+                if ((UUID = expr.exec(this.body)) !== null) {
+                    this.UUID = UUID[1];
+                    this.getProjectsData();
+                }
 
+            }
+        });
     }
     getProjectsData() {
         this.lockForm();
@@ -88,11 +100,10 @@ export class AppComponent {
             this.favoriteProjects = favoritesValue.split(";");
         }
         //Получение данных по трудозатратам и доступным проектам
-        Office.context.mailbox.getUserIdentityTokenAsync(asyncResult => {
-            this.getProjectsDataAssync(asyncResult.value)
-        });
+        this.getProjectsDataAssync();
+
     }
-    getProjectsDataAssync(token: string) {
+    getProjectsDataAssync() {
 
         $("#submit-btn").attr("disabled", false);
 
@@ -101,7 +112,7 @@ export class AppComponent {
 
         //Дождёмся загрузки всех ассинхронных вызовов
         Promise.all([
-            this.ProjectSevice.getData(this.email, this.convertDate(this.myDate), token).then((data: any, textStatus: string, jqXHR: JQueryXHR) => {
+            this.ProjectSevice.getData(this.email, this.convertDate(this.myDate), this.UUID).then((data: any, textStatus: string, jqXHR: JQueryXHR) => {
 
                 let jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
                 let jData = $.parseJSON(jsonString)['#value'];
@@ -120,7 +131,7 @@ export class AppComponent {
             }),
 
 
-            this.ProjectForSelectionSevice.getData(this.email, this.convertDate(this.myDate), token).then((data: any, textStatus: string, jqXHR: JQueryXHR) => {
+            this.ProjectForSelectionSevice.getData(this.email, this.convertDate(this.myDate), this.UUID).then((data: any, textStatus: string, jqXHR: JQueryXHR) => {
 
                 let jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
                 let jData = $.parseJSON(jsonString)['#value'];
@@ -285,12 +296,10 @@ saveProjects() {
     };
 
     this.lockForm();
-    Office.context.mailbox.getUserIdentityTokenAsync(asyncResult => {
-        this.saveProjectsAssync(asyncResult.value)
-    });
+    this.saveProjectsAssync();
 }
-saveProjectsAssync(token: string) {
-    this.SaveProjectsService.saveData(this.projects, this.email, this.convertDate(this.myDate), token).then((data: any, textStatus: string, jqXHR: JQueryXHR) => {
+saveProjectsAssync() {
+    this.SaveProjectsService.saveData(this.projects, this.email, this.convertDate(this.myDate), this.UUID).then((data: any, textStatus: string, jqXHR: JQueryXHR) => {
 
         this.unlockForm();
         let jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
