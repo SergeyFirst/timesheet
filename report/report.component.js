@@ -34,7 +34,7 @@ var ReportComponent = /** @class */ (function () {
         this.total = 0;
         this.dateBegin = "";
         this.dateEnd = "";
-        this.email = "ssuchkov@npoprogress.com";
+        this.email = "";
         this.booleanMap = { true: '+', false: '' };
         //Установим дату начала и окончания отчета
         var dateBegin = new Date;
@@ -49,14 +49,22 @@ var ReportComponent = /** @class */ (function () {
     }
     ReportComponent.prototype.ngOnInit = function () {
         var _this = this;
-        Office.context.mailbox.getUserIdentityTokenAsync(function (asyncResult) {
-            _this.getReportData(asyncResult.value);
+        Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, function (result) {
+            if (result.status == Office.AsyncResultStatus.Succeeded) {
+                _this.body = result.value;
+                var expr = /\[UUID=(.*)\]/;
+                var UUID = void 0;
+                if ((UUID = expr.exec(_this.body)) !== null) {
+                    _this.UUID = UUID[1];
+                    _this.getReportData();
+                }
+            }
         });
     };
-    ReportComponent.prototype.getReportData = function (token) {
+    ReportComponent.prototype.getReportData = function () {
         var _this = this;
         this.report = [];
-        this.ReportSevice.getData(this.email, this.convertDate(this.dateBegin), this.convertDate(this.dateEnd), token).then(function (data, textStatus, jqXHR) {
+        this.ReportSevice.getData(this.email, this.convertDate(this.dateBegin), this.convertDate(this.dateEnd), this.UUID).then(function (data, textStatus, jqXHR) {
             var jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
             var jData = $.parseJSON(jsonString)['#value'];
             _this.total = 0;
@@ -92,10 +100,7 @@ var ReportComponent = /** @class */ (function () {
         });
     };
     ReportComponent.prototype.greateReport = function () {
-        var _this = this;
-        Office.context.mailbox.getUserIdentityTokenAsync(function (asyncResult) {
-            _this.getReportData(asyncResult.value);
-        });
+        this.getReportData();
     };
     ReportComponent.prototype.convertDate = function (dateRU) {
         dateRU = "" + dateRU.replace(new RegExp(String.fromCharCode(8206), 'g'), "");
@@ -108,9 +113,10 @@ var ReportComponent = /** @class */ (function () {
             templateUrl: './report/report.component.tmp.html',
             providers: [report_service_1.ReportService]
         }),
-        __metadata("design:paramtypes", [report_service_1.ReportService, core_1.ChangeDetectorRef])
+        __metadata("design:paramtypes", [report_service_1.ReportService, typeof (_a = typeof core_1.ChangeDetectorRef !== "undefined" && core_1.ChangeDetectorRef) === "function" && _a || Object])
     ], ReportComponent);
     return ReportComponent;
+    var _a;
 }());
 exports.ReportComponent = ReportComponent;
 //# sourceMappingURL=report.component.js.map

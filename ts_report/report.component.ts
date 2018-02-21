@@ -34,9 +34,11 @@ export class ReportComponent {
     total: number = 0;
     dateBegin: string = "";
     dateEnd: string = "";
-    email: string = "ssuchkov@npoprogress.com";
+    email: string = "";
     booleanMap: any = {true:'+',false:''};    
     token: string;
+    body: string;
+    UUID: string;
 
     constructor(private ReportSevice: ReportService, private ref: ChangeDetectorRef) {
         //Установим дату начала и окончания отчета
@@ -53,16 +55,25 @@ export class ReportComponent {
         this.email = Office.context.mailbox.userProfile.emailAddress;        
     }
     ngOnInit() {
-        Office.context.mailbox.getUserIdentityTokenAsync(asyncResult => {
-            this.getReportData(asyncResult.value);
-        });        
+        Office.context.mailbox.item.body.getAsync(Office.CoercionType.Html, (result) => {
+            if (result.status == Office.AsyncResultStatus.Succeeded) {
+                this.body = result.value;
+                var expr = /\[UUID=(.*)\]/;
+                let UUID;
+                if ((UUID = expr.exec(this.body)) !== null) {
+                    this.UUID = UUID[1];
+                    this.getReportData();
+                }
+
+            }
+        });
     }
-    getReportData(token: string) {
+    getReportData() {
         this.report = [];
         this.ReportSevice.getData(this.email,
                                   this.convertDate(this.dateBegin),
                                   this.convertDate(this.dateEnd),
-                                  token).then((data: any, textStatus: string, jqXHR: JQueryXHR) => {
+                                  this.UUID).then((data: any, textStatus: string, jqXHR: JQueryXHR) => {
 
             let jsonString = jqXHR.responseXML.childNodes[0].childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent;
             let jData = $.parseJSON(jsonString)['#value'];
@@ -106,9 +117,7 @@ export class ReportComponent {
         });
     }
     greateReport() {
-        Office.context.mailbox.getUserIdentityTokenAsync(asyncResult => {
-            this.getReportData(asyncResult.value);
-        });
+        this.getReportData();
     }
     convertDate(dateRU: string) {
         dateRU = "" + dateRU.replace(new RegExp(String.fromCharCode(8206),'g'),"");
